@@ -1,0 +1,496 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><title>인증제 교육 시험</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap');*{margin:0;padding:0;box-sizing:border-box;}body{font-family:'Noto Sans KR',sans-serif;background:#f0f2f5;color:#111;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;}@media print{body *{display:none!important;}}
+:root{--p:#3B82F6;--pd:#1E40AF;--pl:#DBEAFE;--s:#10B981;--sl:#D1FAE5;--d:#EF4444;--dl:#FEE2E2;--g2:#E5E7EB;--g5:#6B7280;--g9:#111827;--r:14px;--sh:0 4px 20px rgba(0,0,0,.06);}
+.pg{display:none;min-height:100vh;}.pg.on{display:flex;flex-direction:column;}.ct{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:12px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;border:none;transition:.2s;}.bt:active{transform:scale(.97);}.bp{background:var(--p);color:#fff;}.bs{background:var(--s);color:#fff;}.bo{background:#fff;color:var(--p);border:2px solid var(--p);}.bd{background:var(--d);color:#fff;}.bw{background:#fff;color:#374151;border:2px solid var(--g2);}.bf{width:100%;}.bsm{padding:8px 16px;font-size:13px;}.blg{padding:16px 32px;font-size:17px;}
+.wc{background:#fff;border-radius:20px;padding:40px 28px;width:100%;max-width:440px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.1);}.wc h1,.wc h2{font-size:22px;margin-bottom:4px;}.wc .su{color:var(--g5);font-size:13px;margin-bottom:24px;}
+.ig{margin-bottom:14px;}.ig label{display:block;font-size:13px;font-weight:600;margin-bottom:4px;color:#374151;}.ig input{width:100%;padding:12px 14px;border:2px solid var(--g2);border-radius:10px;font-size:15px;font-family:inherit;outline:none;background:#fff;}.ig input:focus{border-color:var(--p);}
+.cd{background:#fff;border-radius:var(--r);padding:24px;box-shadow:var(--sh);margin-bottom:14px;}
+.hd{background:#fff;padding:12px 20px;box-shadow:var(--sh);position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;}
+.dv{display:flex;align-items:center;gap:12px;margin:20px 0;color:#D1D5DB;font-size:13px;}.dv::before,.dv::after{content:'';flex:1;height:1px;background:var(--g2);}
+.eb{padding:18px;border-radius:14px;border:3px solid var(--g2);background:#fff;cursor:pointer;display:flex;align-items:center;gap:12px;font-family:inherit;width:100%;margin-bottom:12px;text-align:left;}.eb:active{border-color:var(--p);background:var(--pl);}.eb .ei{font-size:32px;}.eb h3{font-size:15px;}.eb p{font-size:11px;color:var(--g5);}
+.et{background:#fff;padding:12px 16px;box-shadow:var(--sh);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}.tm{background:#F9FAFB;padding:6px 14px;border-radius:8px;font-size:18px;font-weight:700;color:var(--p);}.tm.w{color:var(--d);background:var(--dl);animation:pu 1s infinite;}@keyframes pu{0%,100%{opacity:1;}50%{opacity:.5;}}
+.pb{height:4px;background:var(--g2);}.pf{height:100%;background:linear-gradient(90deg,var(--p),#8B5CF6);transition:width .3s;}
+.qw{padding:16px;max-width:580px;margin:0 auto;flex:1;}.qn{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;background:var(--p);color:#fff;border-radius:8px;font-size:12px;font-weight:700;margin-bottom:8px;}.qt{font-size:16px;font-weight:600;line-height:1.7;margin-bottom:16px;word-break:keep-all;}
+.op{padding:13px 14px;border:2px solid var(--g2);border-radius:11px;margin-bottom:9px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:14px;line-height:1.4;}.op:active{transform:scale(.98);}.op.sl{border-color:var(--p);background:var(--pl);font-weight:500;}.oc{width:26px;height:26px;border:2px solid #D1D5DB;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}.op.sl .oc{background:var(--p);color:#fff;border-color:var(--p);}
+.nb{display:flex;justify-content:space-between;gap:8px;margin-top:14px;}.ds{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:8px 16px;}.dt{width:28px;height:28px;border-radius:7px;border:2px solid var(--g2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;cursor:pointer;background:#fff;}.dt.an{background:var(--pl);border-color:var(--p);color:var(--p);}.dt.cu{background:var(--p);color:#fff;}
+.rc{background:#fff;border-radius:20px;padding:36px 20px;box-shadow:0 12px 40px rgba(0,0,0,.1);text-align:center;}.sr{width:140px;height:140px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 24px;}.sr .nm{font-size:42px;font-weight:900;}.sr .lb{font-size:12px;color:var(--g5);}.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}.ri{background:#F9FAFB;border-radius:10px;padding:14px 6px;}.ri .v{font-size:18px;font-weight:700;}.ri .l{font-size:10px;color:var(--g5);margin-top:2px;}
+.aw{padding:16px;max-width:1100px;margin:0 auto;}table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);}th{background:var(--g9);color:#fff;padding:10px;text-align:left;white-space:nowrap;}td{padding:8px 10px;border-bottom:1px solid var(--g2);white-space:nowrap;}tr:hover td{background:#F9FAFB;}.bpa{background:var(--sl);color:#065F46;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;}.bfa{background:var(--dl);color:#991B1B;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;}
+.fr{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}.fr select,.fr input{padding:8px 10px;border:2px solid var(--g2);border-radius:8px;font-family:inherit;font-size:12px;outline:none;}.sc{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:14px;}.si{background:#fff;border-radius:var(--r);padding:16px;text-align:center;box-shadow:var(--sh);}.si .v{font-size:24px;font-weight:800;color:var(--p);}.si .l{font-size:10px;color:var(--g5);margin-top:2px;}.tr{display:flex;gap:5px;margin-bottom:12px;}.tb{padding:6px 12px;border-radius:7px;border:2px solid var(--g2);background:#fff;cursor:pointer;font-family:inherit;font-size:11px;font-weight:600;}.tb.ac{background:var(--p);color:#fff;border-color:var(--p);}
+.mb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:20px;}.mb.sh{display:flex;}.ml{background:#fff;border-radius:18px;padding:28px;max-width:400px;width:100%;text-align:center;}.ml h3{font-size:18px;margin-bottom:6px;}.ml p{color:var(--g5);margin-bottom:16px;font-size:13px;line-height:1.5;}.ma{display:flex;gap:8px;justify-content:center;}
+#so{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:40px;}
+#cb{display:none;position:fixed;top:0;left:0;right:0;background:var(--d);color:#fff;text-align:center;padding:10px;font-size:13px;font-weight:600;z-index:999;}
+@media(max-width:480px){.wc{padding:28px 18px;}.rg{grid-template-columns:1fr;}}
+</style></head><body>
+<div id="so"><h2 style="font-size:26px;margin-bottom:10px">⛔ 시험 종료</h2><p id="sm" style="font-size:15px;color:#ccc;max-width:360px;line-height:1.6;margin-bottom:20px"></p><button class="bt bd blg" onclick="location.href=location.pathname">확인</button></div>
+<div id="cb">⚠️ 경고! 화면 이탈 감지됨. 한 번 더 시 불합격!</div>
+
+<!-- 1. 메인 -->
+<div class="pg on" id="p1"><div class="ct" style="background:linear-gradient(135deg,#0f172a,#1e3a5f,#2563eb)"><div class="wc">
+<div style="font-size:52px;margin-bottom:14px">🎓</div><h1>인증제 교육 시험</h1><p class="su">시험 감독관 또는 응시자를 선택하세요</p>
+<button class="bt bp bf blg" onclick="SP('p2')" style="margin-bottom:10px">📱 시험 감독 (QR+코드 생성)</button>
+<div class="dv">응시자 - 시험코드 입력</div>
+<div style="display:flex;gap:8px"><input id="mc" placeholder="숫자코드" maxlength="6" inputmode="numeric" style="flex:1;text-align:center;font-size:20px;font-weight:700;letter-spacing:4px;padding:12px;border:2px solid var(--g2);border-radius:10px;font-family:inherit;outline:none" onkeydown="if(event.key==='Enter')JC()"><button class="bt bp" onclick="JC()">입장</button></div>
+<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--g2)"><button class="bt bw bf bsm" onclick="SP('p8')">🔐 관리자</button></div>
+</div></div></div>
+
+<!-- 2. QR 시험선택 -->
+<div class="pg" id="p2"><div class="ct" style="background:linear-gradient(135deg,#0f172a,#1e3a5f,#2563eb)"><div class="wc" style="max-width:460px">
+<h2>시험 선택</h2><p class="su">QR+코드를 생성할 시험을 선택하세요</p>
+<button class="eb" onclick="MQ('fire')"><div class="ei">🔥</div><div><h3>화재감시인</h3><p>화기작업 화재 예방 감시</p></div></button>
+<button class="eb" onclick="MQ('guide')"><div class="ei">🚧</div><div><h3>유도원</h3><p>차량·장비 유도 안전 신호</p></div></button>
+<button class="eb" onclick="MQ('confined')"><div class="ei">⚠️</div><div><h3>밀폐공간감시인</h3><p>밀폐공간 감시 안전 관리</p></div></button>
+<button class="bt bw bf" onclick="SP('p1')">← 돌아가기</button>
+</div></div></div>
+
+<!-- 3. QR+코드 표시 -->
+<div class="pg" id="p3"><div class="ct" style="background:linear-gradient(135deg,#0f172a,#1e293b)"><div class="wc" style="max-width:500px">
+<div style="font-size:40px;margin-bottom:6px" id="qi"></div><h2 id="qtt"></h2>
+<p class="su">QR 스캔 후 → 아래 코드를 입력하세요</p>
+<div id="qbx" style="display:flex;justify-content:center;margin:16px 0"></div>
+<div style="font-size:12px;color:var(--g5)">시험 코드 (QR 스캔 후 입력)</div>
+<div style="font-size:42px;font-weight:900;letter-spacing:8px;color:var(--p);margin:10px 0;font-family:monospace" id="qcd"></div>
+<div style="background:#FEF3C7;border-radius:10px;padding:12px;font-size:12px;color:#92400E;margin-bottom:14px">⏰ 이 코드는 <b>약 2시간</b> 동안 유효합니다</div>
+<div style="background:#F9FAFB;border-radius:12px;padding:14px;text-align:left;font-size:12px;line-height:1.8;color:#374151">
+📌 <b>응시 방법</b><br>① 카메라로 <b>QR 스캔</b> → 사이트 접속<br>② 위 <b>숫자 코드 입력</b>하여 시험 입장<br>③ 업체명·생년월일·이름 입력 후 응시<br>📝 20문항 ⏱️ 30분 ✅ 60점 합격<br>⚠️ 화면이탈·캡처 → <b style="color:#EF4444">자동 불합격</b></div>
+<div style="display:flex;gap:8px;margin-top:16px">
+<button class="bt bo" style="flex:1" onclick="SP('p2')">← 다른 시험</button>
+<button class="bt bp" style="flex:1" onclick="MQ(cT)">🔄 재생성</button></div>
+</div></div></div>
+
+<!-- 4. 응시자 정보 -->
+<div class="pg" id="p4"><div class="ct" style="background:linear-gradient(135deg,#0f172a,#1e3a5f,#2563eb)"><div class="wc">
+<div style="font-size:40px;margin-bottom:6px" id="ii"></div><h2 id="it"></h2><p class="su">응시자 정보를 입력해주세요</p>
+<div class="ig"><label>업체명</label><input id="ic" placeholder="소속 업체명"></div>
+<div class="ig"><label>생년월일</label><input id="ib" type="date" max="2010-12-31"></div>
+<div class="ig"><label>이름</label><input id="in" placeholder="이름"></div>
+<button class="bt bp bf blg" onclick="GS()">시험 시작하기 →</button>
+</div></div></div>
+
+<!-- 5. 시험 -->
+<div class="pg" id="p5"><div class="et"><div style="font-weight:700;font-size:14px" id="xt"></div><div class="tm" id="tbb">⏱️ <span id="td">30:00</span></div></div>
+<div class="pb"><div class="pf" id="pba" style="width:0%"></div></div><div style="text-align:center;padding:5px;font-size:11px;color:var(--g5)" id="pt">0/20</div>
+<div class="ds" id="dts"></div><div class="qw" id="qwr"></div></div>
+
+<!-- 6. 결과 -->
+<div class="pg" id="p6"><div class="hd"><div style="font-weight:700;color:var(--p)">📊 시험 결과</div></div><div style="padding:16px;max-width:480px;margin:0 auto" id="ra"></div></div>
+
+<!-- 8. 관리자 로그인 -->
+<div class="pg" id="p8"><div class="ct" style="background:var(--g9)"><div class="wc">
+<div style="font-size:44px;margin-bottom:10px">🔐</div><h2>관리자 로그인</h2><p class="su">비밀번호를 입력하세요</p>
+<div class="ig"><input id="ap" type="password" placeholder="비밀번호" onkeydown="if(event.key==='Enter')AL()"></div>
+<button class="bt bp bf" onclick="AL()">로그인</button><button class="bt bw bf" onclick="SP('p1')" style="margin-top:8px">← 돌아가기</button>
+</div></div></div>
+
+<!-- 9. 관리자 -->
+<div class="pg" id="p9"><div class="hd"><div style="font-weight:700;color:var(--p)">🔐 관리자</div><button class="bt bsm bd" onclick="SP('p1')">로그아웃</button></div>
+<div class="aw"><div class="sc" id="as"></div><div class="cd">
+<h3 style="margin-bottom:10px;font-size:15px">📊 시험 결과</h3>
+<div class="fr"><select id="fE" onchange="RA()"><option value="">전체</option><option value="fire">🔥화재</option><option value="guide">🚧유도</option><option value="confined">⚠️밀폐</option></select><select id="fR" onchange="RA()"><option value="">전체</option><option value="pass">합격</option><option value="fail">불합격</option></select><input id="fS" placeholder="🔍이름/업체" oninput="RA()" style="flex:1;min-width:80px"></div>
+<div class="tr"><button class="tb ac" onclick="ST('all',this)">전체</button><button class="tb" onclick="ST('pass',this)">합격자</button><button class="tb" onclick="ST('fail',this)">불합격자</button></div>
+<div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap"><button class="bt bsm bs" onclick="EX('all')">📥전체</button><button class="bt bsm bp" onclick="EX('pass')">📥합격</button><button class="bt bsm bd" onclick="EX('fail')">📥불합격</button></div>
+<div style="overflow-x:auto" id="at"></div></div>
+<div class="cd" style="margin-top:12px"><button class="bt bsm bw" onclick="if(confirm('전체 삭제?')){if(_fbEnabled){_resultsRef.remove().then(()=>{RA();alert('완료');});}else{localStorage.removeItem(RK);RA();alert('완료');}}">🗑️ 전체 삭제</button></div>
+</div></div>
+
+<!-- 모달 -->
+<div class="mb" id="mS"><div class="ml"><div style="font-size:40px;margin-bottom:6px">⚠️</div><h3>시험 주의사항</h3>
+<p style="text-align:left;font-size:12px">• <b>30분</b> / <b>20문항</b> / <b>60점 합격</b><br><br><span style="color:#EF4444;font-weight:700">🚨 부정행위 방지</span><br>• 앱/화면 전환 → 1회 경고 → 2회 <b>불합격</b><br>• 캡처/녹화 → <b>즉시 불합격</b></p>
+<div class="ma"><button class="bt bo bsm" onclick="CM('mS')">취소</button><button class="bt bp bsm" onclick="CM('mS');BE()">시험 시작</button></div></div></div>
+<div class="mb" id="mB"><div class="ml"><div style="font-size:40px;margin-bottom:6px">📤</div><h3>제출하시겠습니까?</h3><p id="bm">제출 후 수정 불가</p>
+<div class="ma"><button class="bt bo bsm" onclick="CM('mB')">취소</button><button class="bt bp bsm" onclick="CM('mB');DS()">제출</button></div></div></div>
+
+<script>
+const FQ=[
+{q:"화재감시인의 가장 중요한 임무는?",o:["소화기 정비","화기작업 시 화재 발생 여부 감시","작업자 출퇴근 관리","자재 반출입 관리"],a:1},
+{q:"화기작업 완료 후 화재감시를 지속해야 하는 최소 시간은?",o:["즉시 종료","10분","30분 이상","1시간"],a:2},
+{q:"화재감시인이 반드시 배치되어야 하는 작업은?",o:["페인트 작업","용접·용단 등 화기작업","배관 조립작업","전기 배선 작업"],a:1},
+{q:"화재 발생 시 화재감시인의 최우선 행동은?",o:["작업 계속 진행","즉시 경보 발령 및 초기 소화","상사에게 보고 후 대기","대피 후 119 신고만"],a:1},
+{q:"화재감시인이 소지해야 하는 장비가 아닌 것은?",o:["소화기","무전기 또는 통신장비","용접 토치","경보장치"],a:2},
+{q:"A급 화재의 연소 대상은?",o:["유류","일반 가연물(나무, 종이 등)","전기","금속"],a:1},
+{q:"B급 화재에 해당하는 것은?",o:["목재 화재","유류 및 가연성 액체 화재","전기 화재","금속 화재"],a:1},
+{q:"C급 화재에 사용하면 안 되는 소화기는?",o:["CO2 소화기","분말 소화기","물 소화기","할론 소화기"],a:2},
+{q:"소화기 사용 순서로 올바른 것은?",o:["손잡이→안전핀→호스","안전핀 제거→호스 조준→손잡이 누름","호스→안전핀→손잡이","손잡이→호스→안전핀"],a:1},
+{q:"소화기 사용 시 바람의 방향은?",o:["바람을 등지고 사용","바람을 맞으며 사용","바람 방향 무관","옆에서 사용"],a:0},
+{q:"화기작업 허가서의 유효기간은?",o:["1주일","1개월","당일 해당 작업에 한함","1년"],a:2},
+{q:"용접 불꽃이 날아갈 수 있는 최대 거리는?",o:["1m","3m","5m","11m 이상"],a:3},
+{q:"화재감시인의 감시 범위로 적절한 것은?",o:["작업장 내부만","작업장 반경 11m 이상 포함","건물 전체","작업장 입구만"],a:1},
+{q:"가연물 제거 불가 시 조치는?",o:["그냥 작업","불연성 덮개로 보호","가연물 위에서 작업","시간 단축"],a:1},
+{q:"화재감시인의 자격 요건은?",o:["교육 불필요","소방교육 이수자","용접 자격증","관리자 직급"],a:1},
+{q:"화재 삼각형의 3요소가 아닌 것은?",o:["가연물","산소","점화원","이산화탄소"],a:3},
+{q:"분말 소화기 방사 시간은?",o:["1~2초","5~10초","15~25초","1분 이상"],a:2},
+{q:"소화기 적정 사용 거리는?",o:["1m 이내","3~5m","10m","15m 이상"],a:1},
+{q:"화기작업 전 확인 불필요 사항은?",o:["가연물 확인","소화기 비치","작업자 점심 메뉴","허가서 여부"],a:2},
+{q:"인화점이란?",o:["스스로 발화 온도","점화원에 의해 점화되는 최저 온도","완전 연소 온도","소화 완료 온도"],a:1},
+{q:"자연발화의 원인은?",o:["기름 묻은 걸레 방치","물 뿌리기","환기 실시","소화기 비치"],a:0},
+{q:"자동화재탐지설비 구성요소가 아닌 것은?",o:["감지기","수신기","발신기","공기호흡기"],a:3},
+{q:"연기감지기 적합 장소는?",o:["주방","일반 사무실","보일러실","주차장"],a:1},
+{q:"스프링클러 작동 원리는?",o:["수동 조작","열에 의한 감열체 파괴","연기 감지","소리 감지"],a:1},
+{q:"화재 시 대피요령은?",o:["엘리베이터","낮은 자세로 이동","창문 뛰어내림","소지품 챙기기"],a:1},
+{q:"비상구 표시등 색상은?",o:["빨간색","녹색","파란색","노란색"],a:1},
+{q:"감시인이 다른 작업을 해도 되는가?",o:["가능","불가, 감시 전념","간단한 작업 가능","상사 허가 시"],a:1},
+{q:"용단 시 산소와 함께 쓰는 가스는?",o:["질소","아세틸렌","이산화탄소","헬륨"],a:1},
+{q:"아세틸렌 특성은?",o:["무색무취","냄새 있고 공기보다 가벼움","무겁고 무취","액체만 존재"],a:1},
+{q:"산소 용기 색상은?",o:["회색","녹색","갈색","노란색"],a:1},
+{q:"아세틸렌 용기 색상은?",o:["녹색","회색","갈색(황색)","파란색"],a:2},
+{q:"LPG 가스 특성은?",o:["공기보다 가볍다","무거워 낮은 곳 체류","무색무미무취","불에 안 탐"],a:1},
+{q:"전기화재 예방법이 아닌 것은?",o:["문어발 콘센트","정격 퓨즈","전선 점검","누전차단기"],a:0},
+{q:"방폭지역 화기작업 추가 조치는?",o:["불필요","가스 농도 측정 확인","속도 증가","소화기 1개"],a:1},
+{q:"화재경보 시 부적절한 행동은?",o:["초기 소화","대피 유도","경보 무시 작업 계속","119 신고"],a:2},
+{q:"분진폭발 위험 물질은?",o:["모래","금속분진 밀가루","콘크리트","물"],a:1},
+{q:"정전기 화재 예방법은?",o:["접지 실시","습도 낮추기","절연장갑 미착용","금속 부딪히기"],a:0},
+{q:"화재 시 문 열기 전 확인은?",o:["문 색상","손잡이 온도","잠금만","그냥 열기"],a:1},
+{q:"소화기 점검 불필요 사항은?",o:["압력 게이지","안전핀","제조회사 주가","외관"],a:2},
+{q:"교대 근무 원칙은?",o:["연속 근무","인수인계 철저","아무나 교대","중단 후 교대"],a:1},
+{q:"그라인더 불꽃 방향은?",o:["위쪽만","반대쪽","회전 방향 비산","발생 안함"],a:2},
+{q:"소화기 배치 기준은?",o:["보행 20m 이내","지하만","관리자실만","창고만"],a:0},
+{q:"감시인 금지사항은?",o:["소화기 점검","주변 감시","휴대폰 게임","경보 확인"],a:2},
+{q:"옥내 소화전 사용 순서는?",o:["함→호스→밸브→방수","밸브→호스→방수","방수→호스→밸브","호스→방수→밸브"],a:0},
+{q:"물 소화기 부적합 화재는?",o:["종이","나무","전기 화재","섬유"],a:2},
+{q:"발화점이란?",o:["스스로 발화 온도","증기 발생 온도","소화 완료 온도","연소 지속 온도"],a:0},
+{q:"플래시오버란?",o:["소화기 방사","실내 급격 전면 연소","소방차 도착","진화 완료"],a:1},
+{q:"백드래프트란?",o:["진화 기법","밀폐공간 공기유입 폭발연소","소화약제 방출","연기 배출"],a:1},
+{q:"화재 시 계단 대피 원칙은?",o:["위층","아래층","계단 금지","엘리베이터"],a:1},
+{q:"소화기 비치 최소 개수는?",o:["불필요","1개 이상","5개","10개"],a:1},
+{q:"제4류 위험물은?",o:["산화성 고체","인화성 액체","자연발화성","가연성 가스"],a:1},
+{q:"가스누출 시 조치는?",o:["작업 계속","즉시 중지 환기","가스 분석","퇴근 후 보고"],a:1},
+{q:"방화문 기능은?",o:["채광","화재 확산 방지","장식","환기"],a:1},
+{q:"소화기 내용연수는?",o:["1년","5년","10년","영구"],a:2},
+{q:"가연성가스 농도 기준은?",o:["LEL 25% 미만","50% 미만","100% 미만","기준 없음"],a:0},
+{q:"연소 4요소가 아닌 것은?",o:["가연물","산소","점화에너지","소화기"],a:3},
+{q:"연쇄반응이란?",o:["소화 반응","연소 지속 화학반응","녹 발생","중화 반응"],a:1},
+{q:"질식소화 원리는?",o:["열 제거","산소 차단","가연물 제거","연쇄반응 차단"],a:1},
+{q:"냉각소화 원리는?",o:["산소 차단","가연물 제거","인화점 이하로 냉각","연쇄반응 차단"],a:2},
+{q:"제거소화 원리는?",o:["냉각","산소 차단","가연물 제거","약품 투입"],a:2},
+{q:"억제소화 원리는?",o:["산소 차단","가연물 제거","냉각","연쇄반응 차단"],a:3},
+{q:"교육 불필요 내용은?",o:["소화기 사용","비상연락","요리 실습","화재 대응"],a:2},
+{q:"고층 건물 대피법은?",o:["옥상","엘리베이터","비상계단 아래로","창문 뛰어내림"],a:2},
+{q:"경보설비는?",o:["소화기","스프링클러","비상벨","방화문"],a:2},
+{q:"PASS의 S는?",o:["Stop","Squeeze","Sweep(쓸듯이 방사)","Start"],a:2},
+{q:"PASS의 P는?",o:["Push","Pull(안전핀)","Point","Press"],a:1},
+{q:"배치 기준 중 틀린 것은?",o:["화기작업 시","위험물 시","일반 사무 시에도 항상","밀폐공간 시"],a:2},
+{q:"방화구획 목적은?",o:["장식","화재 확산 방지","소음 차단","에너지 절약"],a:1},
+{q:"피난유도등 위치는?",o:["창고","비상구 상단","지하 바닥","옥상"],a:1},
+{q:"화재조사 목적이 아닌 것은?",o:["원인 규명","재발 방지","처벌 극대화","피해 산정"],a:2},
+{q:"옥외소화전 용도는?",o:["실내 진압","외부 대형 화재","가스 방지","분진 제거"],a:1},
+{q:"ABC소화기 성분은?",o:["물","제1인산암모늄","CO2","포소화약제"],a:1},
+{q:"CO2소화기 장점은?",o:["잔여물 없음","저렴","간단","모든 화재"],a:0},
+{q:"연기 특성은?",o:["아래로만","유독가스 포함","무해","시야 무관"],a:1},
+{q:"CO 중독 위험은?",o:["냄새 감지","무색무취 치명적","피부만","물에 의해"],a:1},
+{q:"대피훈련 주기는?",o:["5년","연 1회 이상","10년","불필요"],a:1},
+{q:"안전조치가 아닌 것은?",o:["가연물 제거","소화기","환기","창문 밀폐"],a:3},
+{q:"역화방지기 위치는?",o:["산소만","아세틸렌만","토치와 용기 모두","불필요"],a:2},
+{q:"근무일지 불필요 기록은?",o:["근무시간","이상사항","개인일기","작업내용"],a:2},
+{q:"가벼운 소화기는?",o:["분말 20형","CO2 23kg","투척용","수동식 대형"],a:2},
+];
+const GQ=[
+{q:"유도원의 주요 임무는?",o:["자재 운반","차량·장비 유도 안전 확보","도구 정비","현장 청소"],a:1},
+{q:"배치 필수가 아닌 경우는?",o:["후진 차량","사각지대 장비","빈 공터 주행","양중 작업"],a:2},
+{q:"필수 복장은?",o:["일반복","안전조끼·안전모","정장","운동복"],a:1},
+{q:"야간 추가 장비는?",o:["선글라스","야광봉·LED봉","이어폰","장화"],a:1},
+{q:"후진 유도 시 위치는?",o:["차량 뒤","운전자 볼 수 있는 측면","차량 위","차량 내부"],a:1},
+{q:"크레인 유도원 역할은?",o:["직접 조작","양중 신호 안전 유도","자재 묶기","촬영"],a:1},
+{q:"정지 신호는?",o:["양팔 수평 손바닥 아래","한 팔 좌우","양팔 교차","호루라기 길게"],a:0},
+{q:"금지 행동은?",o:["눈 맞춤","장비 반경 내 진입","호루라기","수신호"],a:1},
+{q:"소통 방법은?",o:["SNS","수신호·무전기","큰 소리","눈짓"],a:1},
+{q:"덤프트럭 안전거리는?",o:["바로 옆","최소 2m 이상","10cm","무관"],a:1},
+{q:"유도원 없이 후진 시?",o:["효율 증가","사각지대 충돌 사고","속도 향상","비용 절감"],a:1},
+{q:"지게차 유도 부적절은?",o:["적재물 확인","경로 확인","탑승 유도","보행자 통제"],a:2},
+{q:"도로작업 설치물은?",o:["꽃화분","라바콘·안전표지판","벤치","가로등"],a:1},
+{q:"호루라기 짧게 1번은?",o:["정지","전진","후진","긴급"],a:1},
+{q:"호루라기 짧게 2번은?",o:["전진","정지","후진","속도 올림"],a:2},
+{q:"호루라기 길게 1번은?",o:["전진","후진","비상정지","좌회전"],a:2},
+{q:"빨간 깃발은?",o:["전진","정지·위험","서행","안전"],a:1},
+{q:"녹색 깃발은?",o:["정지","전진(안전)","주의","후진"],a:1},
+{q:"현장 제한속도는?",o:["60km/h","10~20km/h","100km/h","제한없음"],a:1},
+{q:"2인 배치 필요는?",o:["전진","장거리후진 시야불가","빈 도로","주차장"],a:1},
+{q:"음주 유도 시?",o:["문제없다","산업안전보건법 위반","효율 오름","벌금만"],a:1},
+{q:"양중작업 불필요 확인은?",o:["인양물 무게","와이어로프","운전자 식사","주변 대피"],a:2},
+{q:"크레인 신호 방법은?",o:["아무 동작","KS규정 신호","소리만","눈짓"],a:1},
+{q:"권상 신호는?",o:["팔 아래","팔 위로 원 그림","양팔 교차","수평"],a:1},
+{q:"권하 신호는?",o:["위로","아래로 원 그림","머리 위","뛰어오르기"],a:1},
+{q:"비상정지 신호는?",o:["천천히","급하게 교차","끄덕","호루라기 짧게"],a:1},
+{q:"도로공사 배치 위치는?",o:["내부","전방 충분한 거리","종료 후","차량 내"],a:1},
+{q:"교육 불필요 내용은?",o:["수신호","비상 대처","요리 실습","안전법규"],a:2},
+{q:"고소작업차 주의점은?",o:["색상","상부 전선 장애물","연식","운전자 경력"],a:1},
+{q:"법적 근거는?",o:["식품위생법","산업안전보건법","도로교통법만","건축법"],a:1},
+{q:"배치의무 조항은?",o:["제35조","제100조","제200조","해당없음"],a:0},
+{q:"피로 시 조치는?",o:["참고 근무","교대 휴식","카페인만","시간 단축만"],a:1},
+{q:"동선 겹칠 때?",o:["무시","분리 안전 유도","차량 우선","뛰라고"],a:1},
+{q:"비상 시 조치는?",o:["계속","즉시 정지 대피유도","혼자 대피","상사에게만"],a:1},
+{q:"위치 기준이 아닌 것은?",o:["운전자 시야","안전장소","그늘(날씨)","경로 확인"],a:2},
+{q:"타워크레인 자격은?",o:["불필요","교육 이수 자격","운전면허만","체력만"],a:1},
+{q:"수신호 안 보일 때?",o:["계속","중지 후 무전기","더 크게","포기"],a:1},
+{q:"서면 안 되는 위치는?",o:["측면","이동경로 위","시야 내","안전구역"],a:1},
+{q:"롤러 유도 주의점은?",o:["속도 빠름","앞뒤 사각지대 넓음","소음 적음","가벼움"],a:1},
+{q:"굴삭기 안전거리는?",o:["팔 길이","작업반경 밖","30cm","1m"],a:1},
+{q:"2인 역할 분담은?",o:["같은 위치","전방·후방 각각","한 명 휴식","한 명 촬영"],a:1},
+{q:"교대 주기는?",o:["12시간","2시간 이내","불필요","하루 1회"],a:1},
+{q:"TBM 불필요 내용은?",o:["당일 작업","유도 동선","개인 일정","비상연락"],a:2},
+{q:"출입구 배치 이유는?",o:["기록","차량·보행자 통제","청소","자재 검수"],a:1},
+{q:"미배치 사고 시?",o:["운전자만","사업주도 책임","아무도 아님","피해자"],a:1},
+{q:"야간 사용 불가는?",o:["야광봉","일반 깃발(비반사)","LED봉","반사판"],a:1},
+{q:"우천 시 조치는?",o:["우산만","반사 우의 미끄럼 주의","자동 중단","실내만"],a:1},
+{q:"체력 조건 중요한 것은?",o:["시력·청력 정상","키 180cm","체중 80kg","악력 50kg"],a:0},
+{q:"착용물은?",o:["마스크만","안전모+조끼+안전화","모자만","장갑만"],a:1},
+{q:"신호는 어떻게?",o:["작고 빠르게","크고 명확하게","느리고 작게","말로만"],a:1},
+{q:"사전 협의 사항은?",o:["점심","신호체계·경로","퇴근","차량색상"],a:1},
+{q:"컨베이어 주의점은?",o:["소음","협착 위험","분진","냄새"],a:1},
+{q:"스트레스 관리 이유는?",o:["무관","집중력 저하 사고","외모","승진"],a:1},
+{q:"계획 불필요 사항은?",o:["작업 종류","장비 종류","혈액형","작업 환경"],a:2},
+{q:"보행자 안내는?",o:["뛰라고","안전 통행로 안내","방치","차량 쪽"],a:1},
+{q:"배치 위반 벌칙은?",o:["없음","과태료·벌금","칭찬","경고만"],a:1},
+{q:"고속도로 위치는?",o:["직전","전방 충분한 거리","뒤","중앙분리대"],a:1},
+{q:"피로도 부적절은?",o:["교대","휴식","12시간 연속","환경 조성"],a:2},
+{q:"많은 재해는?",o:["화재","충돌·협착","감전","추락"],a:1},
+{q:"확인할 장비 상태는?",o:["색상","후방카메라·경보","가격","제조사"],a:1},
+{q:"신호 무시 시?",o:["정상","안전보건법 위반","효율적","무관"],a:1},
+{q:"사업주 의무는?",o:["선택","배치·교육 의무","자율","원청만"],a:1},
+{q:"올바른 자세는?",o:["편하게","긴장감 집중","무관심","불안"],a:1},
+{q:"굴삭기 선회 시?",o:["가까이","반경 밖 통제","반경 안","등 돌리기"],a:1},
+{q:"야간 복장은?",o:["어두운 옷","고휘도 반사조끼","자유","흰색만"],a:1},
+{q:"핸드폰 유도?",o:["효율적","주의력 분산 금지","문제없다","이해해줌"],a:1},
+{q:"사고 예방 핵심은?",o:["빠른 작업","명확 신호 안전거리","속도 증가","유도원 줄이기"],a:1},
+{q:"해임 사유는?",o:["성실","음주·신호무시","무사고","교육이수"],a:1},
+{q:"교육 주기는?",o:["10년","신규 및 정기","평생 1회","불필요"],a:1},
+{q:"주간 유도 도구는?",o:["야광봉","신호 깃발","손전등","레이저"],a:1},
+{q:"대형차량 주의는?",o:["동일","제동거리 길어 사전신호","빠르게","1명 충분"],a:1},
+{q:"근무중 음식물은?",o:["자유","근무중 금지 휴식시간","항상","규정없음"],a:1},
+{q:"장애물 발견 시?",o:["무시","즉시 정지 제거/우회","알아서","위로 지나가게"],a:1},
+{q:"펌프카 유도원은?",o:["직접 조작","붐대 경로 안전확보","배합","거푸집"],a:1},
+{q:"점검 불필요 장구는?",o:["안전모","안전조끼","넥타이","안전화"],a:2},
+{q:"미배치 사고 사업주?",o:["처벌없음","안전보건법 위반","경고만","칭찬"],a:1},
+{q:"인수인계 불필요는?",o:["작업상황","특이사항","개인전화","장비상태"],a:2},
+{q:"배치 불필요 기계는?",o:["굴삭기","지게차","일반 승용차","덤프트럭"],a:2},
+{q:"전방 유도 최소거리는?",o:["바로 앞","5m 이상","1cm","30m"],a:1},
+];
+const CQ=[
+{q:"밀폐공간 정의는?",o:["넓은 야외","환기 불충분 유해가스 가능 공간","사무실","식당"],a:1},
+{q:"감시인 주요 역할은?",o:["도구 준비","출입감시·구조요청","직접 작업","장비 수리"],a:1},
+{q:"밀폐공간이 아닌 것은?",o:["맨홀","탱크 내부","일반 사무실","하수도"],a:2},
+{q:"측정 항목은?",o:["온도만","산소·유해가스 농도","소음","조명"],a:1},
+{q:"정상 산소 농도는?",o:["10~15%","18~23.5%","25~30%","30% 이상"],a:1},
+{q:"산소 18% 미만은?",o:["정상","산소결핍","과잉","무관"],a:1},
+{q:"H₂S 허용 농도는?",o:["100ppm","50ppm","10ppm 이하","500ppm"],a:2},
+{q:"CO 허용 농도는?",o:["200ppm","100ppm","30ppm 이하","500ppm"],a:2},
+{q:"감시인 위치는?",o:["내부","출입구 부근","사무실","식당"],a:1},
+{q:"금지 행동은?",o:["출입 확인","직접 내부 진입","비상연락","측정 확인"],a:1},
+{q:"환기 방법은?",o:["자연환기만","강제환기","불필요","문만 열기"],a:1},
+{q:"가장 큰 사고 원인은?",o:["장비 고장","산소결핍·유해가스 중독","추락","화재"],a:1},
+{q:"사고 시 최우선 행동은?",o:["직접 구조","즉시 119 구조팀 요청","작업 계속","퇴근"],a:1},
+{q:"호흡보호구는?",o:["방진마스크","공기호흡기(SCBA)","면마스크","KF94"],a:1},
+{q:"허가서 불필요 항목은?",o:["작업 내용","가스 측정","작업자 혈액형","비상연락"],a:2},
+{q:"산소 23.5% 초과 시?",o:["안전","화재폭발 위험 증가","더 좋음","무관"],a:1},
+{q:"감시인 최소 배치는?",o:["불필요","1명 이상","5명","10명"],a:1},
+{q:"메탄 위험성은?",o:["독성만","폭발·질식","무해","냄새 심함"],a:1},
+{q:"측정기 비감지 항목은?",o:["산소","가연성가스","자외선","H₂S"],a:2},
+{q:"TBM 목적은?",o:["출근 확인","위험요인 공유 안전대책","점심","성과 평가"],a:1},
+{q:"2차 피해 원인은?",o:["장비 부족","보호장비 없이 진입","날씨","시간 부족"],a:1},
+{q:"삼각대 용도는?",o:["작업대","비상 시 인양","가스 측정","환기 장비"],a:1},
+{q:"하네스 착용 이유는?",o:["낙하만","비상 시 구출","장식","규정일 뿐"],a:1},
+{q:"연속 측정이란?",o:["한 번만","지속 모니터링","일주일 한 번","필요 시만"],a:1},
+{q:"통신장비는?",o:["개인폰만","무전기 즉시 연락","편지","이메일"],a:1},
+{q:"유해가스 이상 시?",o:["계속","즉시 중지 대피","대기","환기만"],a:1},
+{q:"출입 기록 이유는?",o:["형식적","비상 시 인원 파악","급여","출퇴근"],a:1},
+{q:"감시인 자격은?",o:["교육 불필요","안전교육 이수자","용접 자격증","운전면허만"],a:1},
+{q:"N₂ 위험 이유는?",o:["독성","산소 치환 질식","폭발성","부식성"],a:1},
+{q:"환기 장비 위치는?",o:["내부 바닥","출입구에서 내부로","외부 빨아들이기","불필요"],a:1},
+{q:"CO₂ 위험성은?",o:["무해","고농도 질식","폭발만","피부만"],a:1},
+{q:"법적 근거는?",o:["도로교통법","산업안전보건기준 규칙","식품위생법","건축법"],a:1},
+{q:"사용 가능 조명은?",o:["일반 전구","방폭형 조명","촛불","라이터"],a:1},
+{q:"작업 중지 기준은?",o:["LEL 50%","25%","10%","100%"],a:2},
+{q:"전기장비 기준은?",o:["일반 가능","방폭형 사용","사용 금지","배터리만"],a:1},
+{q:"인수인계 포함은?",o:["개인일정","가스값·현황·출입자","날씨","주식"],a:1},
+{q:"화기작업 추가 조치는?",o:["동일","가스측정·화재감시인","불필요","환기중단"],a:1},
+{q:"작업자 쓰러짐 시?",o:["직접 진입","구조팀 요청 무단진입 금지","지켜보기","퇴근"],a:1},
+{q:"교육 주기는?",o:["1회만","특별교육·정기교육","5년","의무 없음"],a:1},
+{q:"산소결핍 비증상은?",o:["두통","호흡곤란","체중 증가","의식 소실"],a:2},
+{q:"H₂S 특징은?",o:["고농도 냄새 감지","고농도 후각 마비","피부만","물에서만"],a:1},
+{q:"가스 측정 순서는?",o:["유해→산소→가연","산소→가연→유해","순서 무관","가연만"],a:1},
+{q:"구조 밧줄 용도는?",o:["자재 운반","비상 시 구출","장비 고정","환기 연결"],a:1},
+{q:"용접 시 유해가스는?",o:["산소만","CO 질소산화물 등","수증기만","CO₂만"],a:1},
+{q:"인원 제한 이유는?",o:["비용","신속 대피 구조","효율","규정 없음"],a:1},
+{q:"불필요 기록은?",o:["출입자","가스 측정","작업자 취미","이상 사항"],a:2},
+{q:"산소결핍 비원인은?",o:["미생물","금속 산화","창문 개방","불활성 가스"],a:2},
+{q:"출입금지 표지판 이유는?",o:["장식","무단출입 사고 예방","효율","관람용"],a:1},
+{q:"허가서 발급자는?",o:["작업자","관리감독자","아무나","외부인"],a:1},
+{q:"비상구조 포함사항은?",o:["퇴근","장비·절차·연락","식사","일기예보"],a:1},
+{q:"아르곤 위험 이유는?",o:["독성","산소치환 질식","폭발성","냄새"],a:1},
+{q:"환기 불가 시?",o:["그냥 진행","공기호흡기 착용","마스크만","불가능 판단"],a:1},
+{q:"교육 불필요 내용은?",o:["가스측정기","응급처치","주식 투자","비상 절차"],a:2},
+{q:"소통 방법은?",o:["불필요","유무선 상시","하루 한 번","종료 후"],a:1},
+{q:"LEL이란?",o:["폭발 최저 농도","최고 농도","산소 농도","유해 농도"],a:0},
+{q:"방폭형 이유는?",o:["비싸서","스파크 폭발 방지","내구성","규정 없음"],a:1},
+{q:"작업 후 확인은?",o:["외관만","작업자 퇴출·장비 회수","문 잠그기","보고서만"],a:1},
+{q:"특별교육 시간은?",o:["1시간","2시간(최초)/16시간(신규)","30분","불필요"],a:1},
+{q:"출입 통제는?",o:["구두만","허가확인·명부기록","아무나","자물쇠만"],a:1},
+{q:"비재해 유형은?",o:["질식","중독","일사병","폭발"],a:2},
+{q:"측정기 교정 주기는?",o:["10년","6개월~1년","불필요","매번 구입"],a:1},
+{q:"근무 태도는?",o:["핸드폰","출입구 집중 감시","함께 작업","수면"],a:1},
+{q:"정전 시 조치는?",o:["계속","즉시 중지 대피 환기","전등 교체","대기"],a:1},
+{q:"유기용제 위험은?",o:["없음","중독·화재 위험","피부만","냄새만"],a:1},
+{q:"가장 많은 사망원인은?",o:["추락","질식","화재","감전"],a:1},
+{q:"법적 의무는?",o:["없음","출입감시·이상 시 조치","직접 작업","이탈 가능"],a:1},
+{q:"표지판 내용은?",o:["주차금지","출입금지 위험 경고","흡연구역","비상구"],a:1},
+{q:"비상연락 포함은?",o:["SNS","119·관리감독자·구조팀","인터넷","이메일"],a:1},
+{q:"측정 위치는?",o:["입구만","상중하 3개 지점","아무 1곳","외부만"],a:1},
+{q:"퇴출 신호 시?",o:["무시","즉시 중지 퇴출","확인 후 계속","연락 후 대기"],a:1},
+{q:"고온 추가 위험은?",o:["없음","유해가스 증발·열사병","효율 증가","농도 감소"],a:1},
+{q:"사다리 기준은?",o:["아무거나","견고 고정 3점 지지","줄 사다리만","사용 금지"],a:1},
+{q:"페인트 작업 주의는?",o:["환기 불필요","강제환기 방독마스크","일반마스크만","창문만"],a:1},
+{q:"자리 비울 때?",o:["그냥 비움","교대자 배치 후","알리기만","교대자 필수"],a:3},
+{q:"고습도 위험은?",o:["없음","감전·미끄럼","편해짐","농도 감소"],a:1},
+{q:"비상조명 필요성은?",o:["불필요","정전 시 대피 필수","장식","야간만"],a:1},
+{q:"처벌 대상 행위는?",o:["성실","태만 사고 발생","교육 이수","비상연락"],a:1},
+{q:"예방 3대 원칙은?",o:["속도효율비용","환기 측정 감시","청소정리정돈","교육훈련평가"],a:1},
+{q:"소화기 비치 경우는?",o:["항상","화기작업 시","불필요","감독자 판단"],a:1},
+{q:"건강 요건은?",o:["시력·청력 정상","요건 없음","체력 무관","나이만"],a:0},
+];
+const BK={fire:FQ,guide:GQ,confined:CQ};
+const EN={fire:"화재감시인",guide:"유도원",confined:"밀폐공간감시인"};
+const EI={fire:"🔥",guide:"🚧",confined:"⚠️"};
+const EC={"fire":"1","guide":"2","confined":"3"};
+const RC={"1":"fire","2":"guide","3":"confined"};
+const RK="cert_v6";
+
+// ===================================================================
+// [설정 1] 실제 배포(호스팅) 주소 - QR코드가 file:// 로 열려서
+// "your-site.com"이 나오는 문제를 막기 위한 값입니다.
+// 이 파일을 실제 웹 서버(예: Netlify, GitHub Pages, 카페24 등)에 올린 뒤
+// 그 주소를 아래에 채우면 QR이 항상 정확한 주소를 담게 됩니다.
+// 비워두면(공백 '') 접속 중인 현재 주소(location.href)를 자동으로 사용합니다.
+// 단, 이 파일을 PC에서 더블클릭(=file:// 로 열기)해서 QR을 생성하면
+// 어떤 경우에도 다른 기기에서는 열 수 없으니 반드시 실제 서버에 올려서 접속한 뒤 QR을 생성하세요.
+const SITE_URL="";
+
+// ===================================================================
+// [설정 2] 응시자(폰)와 관리자(PC)가 "같은 시험 결과"를 보려면
+// 두 기기가 같은 저장소를 공유해야 합니다. localStorage는 기기/브라우저별로
+// 완전히 분리되어 있어 폰에서 본 시험 결과가 PC 관리자 화면에 절대 나타나지 않습니다.
+// 이를 해결하기 위해 무료 클라우드 DB인 Firebase Realtime Database를 사용합니다.
+// [설정 방법]
+// 1. https://console.firebase.google.com 에서 무료 프로젝트 생성
+// 2. 빌드 > Realtime Database > 데이터베이스 만들기 (테스트 모드로 시작)
+// 3. 프로젝트 설정(톱니바퀴) > 일반 > "내 앱" > 웹 앱 추가 후 나오는 firebaseConfig 값을 아래에 붙여넣기
+// 4. Realtime Database > 규칙(Rules)을 아래처럼 설정 (테스트/소규모 운영용, 필요시 강화)
+//    { "rules": { ".read": true, ".write": true } }
+const firebaseConfig = {
+  apiKey: "여기에_API_KEY_입력",
+  authDomain: "여기에_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://여기에_PROJECT_ID-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "여기에_PROJECT_ID"
+};
+let _fbEnabled=false, _resultsCache=[], _resultsRef=null;
+try{
+  if(firebaseConfig.apiKey && firebaseConfig.apiKey.indexOf('여기에')===-1){
+    firebase.initializeApp(firebaseConfig);
+    _resultsRef=firebase.database().ref(RK);
+    _fbEnabled=true;
+    _resultsRef.on('value',snap=>{
+      const val=snap.val()||{};
+      _resultsCache=Object.keys(val).map(k=>val[k]);
+      const p9=document.getElementById('p9');
+      if(p9&&p9.classList.contains('on'))RA();
+    });
+  }else{
+    console.warn('firebaseConfig 값이 아직 설정되지 않아, 이 기기에만 저장되는 로컬 저장소(localStorage)를 임시로 사용합니다. 관리자-응시자 간 결과 동기화가 필요하면 firebaseConfig를 반드시 설정하세요.');
+  }
+}catch(e){
+  console.error('Firebase 초기화 실패:', e);
+}
+const SECRET=2749;
+let U=null,cT='',cQ=[],ci=0,an=[],tmr=null,tL=0,cN=0,xO=false,aT='all';
+
+function SP(id){document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));document.getElementById(id).classList.add('on');if(id==='p9')RA();}
+function CM(id){document.getElementById(id).classList.remove('sh');}
+function SM(id){document.getElementById(id).classList.add('sh');}
+
+// ===== 시간 기반 코드 생성 (2시간 유효) =====
+function genHash(h,d){return String(((d*100+h)*7+SECRET)%90000+10000);}
+function makeCode(type){const n=new Date();return EC[type]+genHash(n.getHours(),n.getDate());}
+function validateCode(code){
+  if(code.length!==6||!/^\d+$/.test(code))return null;
+  const exType=RC[code[0]];if(!exType)return null;
+  const inputHash=code.substring(1);
+  const now=new Date();
+  for(let off=0;off<=2;off++){
+    const t=new Date(now.getTime()-off*3600000);
+    if(genHash(t.getHours(),t.getDate())===inputHash)return exType;
+  }
+  return null;
+}
+
+// ===== QR 생성 =====
+function MQ(type){
+  cT=type;const code=makeCode(type);
+  document.getElementById('qi').textContent=EI[type];
+  document.getElementById('qtt').textContent=EN[type]+' 시험';
+  document.getElementById('qcd').textContent=code;
+  // QR = 사이트 URL만 (코드 별도 입력)
+  const base=location.href.split('?')[0].split('#')[0];
+  const isLocalFile=base.startsWith('file');
+  const url=SITE_URL||(isLocalFile?'https://실제-배포주소를-SITE_URL에-입력하세요.com':base);
+  if(isLocalFile&&!SITE_URL){
+    alert('⚠️ 이 파일이 아직 실제 웹 주소로 열리지 않았습니다 (file:// 로 직접 열림).\n\nQR코드가 다른 휴대폰에서 정상 작동하려면,\n① 이 HTML 파일을 실제 웹 호스팅(예: Netlify, GitHub Pages, 카페24 등)에 업로드하고\n② 그 주소(https://...)로 접속한 뒤 QR을 다시 생성하거나\n③ 코드 상단 SITE_URL 값에 배포 주소를 직접 입력하세요.');
+  }
+  const bx=document.getElementById('qbx');bx.innerHTML='';
+  try{new QRCode(bx,{text:url,width:220,height:220,colorDark:"#111827",colorLight:"#fff",correctLevel:QRCode.CorrectLevel.M});}
+  catch(e){bx.innerHTML='<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(url)+'">';}
+  SP('p3');
+}
+
+// ===== 코드 입력으로 입장 =====
+function JC(){
+  const code=document.getElementById('mc').value.trim();
+  if(!code||code.length<6)return alert('6자리 숫자코드를 입력하세요.');
+  const type=validateCode(code);
+  if(!type)return alert('코드가 만료되었거나 올바르지 않습니다.\n시험 감독관에게 새 코드를 요청하세요.');
+  cT=type;GI();
+}
+
+function GI(){document.getElementById('ii').textContent=EI[cT];document.getElementById('it').textContent=EN[cT]+' 시험';SP('p4');}
+
+function GS(){const c=document.getElementById('ic').value.trim(),b=document.getElementById('ib').value,n=document.getElementById('in').value.trim();if(!c||!b||!n)return alert('모든 항목 입력하세요.');U={co:c,bd:b,nm:n};SM('mS');}
+
+function sf(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+function BE(){cQ=sf(BK[cT]).slice(0,20).map(q=>{const s=sf([0,1,2,3]);return{q:q.q,o:s.map(i=>q.o[i]),a:s.indexOf(q.a)}});ci=0;an=new Array(20).fill(-1);tL=1800;cN=0;xO=true;document.getElementById('xt').textContent=EI[cT]+' '+EN[cT];RQ();STM();SP('p5');ES();}
+
+function STM(){clearInterval(tmr);UT();tmr=setInterval(()=>{tL--;UT();if(tL<=0){clearInterval(tmr);EE();}},1000);}
+function UT(){const m=String(0|tL/60).padStart(2,'0'),s=String(tL%60).padStart(2,'0');document.getElementById('td').textContent=m+':'+s;document.getElementById('tbb').className=tL<=60?'tm w':'tm';}
+
+function RQ(){const q=cQ[ci],lb=['①','②','③','④'];let h='<div class="cd"><div class="qn">'+(ci+1)+'/20</div><div class="qt">'+q.q+'</div>';q.o.forEach((o,i)=>{h+='<div class="op '+(an[ci]===i?'sl':'')+'" onclick="PK('+i+')"><div class="oc">'+lb[i]+'</div><span>'+o+'</span></div>';});h+='</div><div class="nb">';h+=ci>0?'<button class="bt bo bsm" onclick="GQ2('+(ci-1)+')">← 이전</button>':'<div></div>';h+=ci<19?'<button class="bt bp bsm" onclick="GQ2('+(ci+1)+')">다음 →</button>':'<button class="bt bs bsm" onclick="SB()">✅ 제출</button>';h+='</div>';document.getElementById('qwr').innerHTML=h;const ac=an.filter(a=>a!==-1).length;document.getElementById('pba').style.width=(ac/20*100)+'%';document.getElementById('pt').textContent=ac+'/20';let d='';for(let i=0;i<20;i++){let c='dt';if(i===ci)c+=' cu';else if(an[i]!==-1)c+=' an';d+='<div class="'+c+'" onclick="GQ2('+i+')">'+(i+1)+'</div>';}document.getElementById('dts').innerHTML=d;}
+function PK(i){an[ci]=i;RQ();};function GQ2(i){ci=i;RQ();}
+function SB(){const u=an.filter(a=>a===-1).length;document.getElementById('bm').textContent=u>0?'⚠️ '+u+'문제 미응답!':'제출 후 수정 불가';SM('mB');}
+function DS(){clearInterval(tmr);EE();}
+function EE(){xO=false;DI();let c=0;cQ.forEach((q,i)=>{if(an[i]===q.a)c++;});const s=c*5,p=s>=60,tu=1800-tL,mm=0|tu/60,ss=tu%60;SR({nm:U.nm,co:U.co,bd:U.bd,ex:cT,en:EN[cT],sc:s,cr:c,tot:20,ps:p,tm:mm+'분'+ss+'초',dt:new Date().toLocaleString('ko-KR'),ts:Date.now()});
+document.getElementById('ra').innerHTML='<div class="rc"><div style="font-size:60px;margin-bottom:10px">'+(p?'🎉':'😢')+'</div><h2 style="font-size:26px;margin-bottom:4px">'+(p?'합격을 축하합니다!':'불합격입니다')+'</h2><p style="color:var(--g5);font-size:13px;margin-bottom:24px">'+EI[cT]+' '+EN[cT]+'<br>'+U.nm+' | '+U.co+'</p><div class="sr" style="border:6px solid '+(p?'var(--s)':'var(--d)')+'"><div class="nm" style="color:'+(p?'var(--s)':'var(--d)')+'">'+s+'</div><div class="lb">/ 100점</div></div><div class="rg"><div class="ri"><div class="v" style="color:var(--s)">'+c+'</div><div class="l">정답</div></div><div class="ri"><div class="v" style="color:var(--d)">'+(20-c)+'</div><div class="l">오답</div></div><div class="ri"><div class="v">'+mm+':'+String(ss).padStart(2,'0')+'</div><div class="l">소요시간</div></div></div><div style="background:'+(p?'var(--sl)':'var(--dl)')+';border-radius:10px;padding:14px"><div style="font-weight:700;color:'+(p?'#065F46':'#991B1B')+'">'+(p?'✅ 합격 기준(60점) 충족':'❌ 합격 기준(60점) 미달')+'</div></div></div>';SP('p6');}
+
+function CF(r){clearInterval(tmr);xO=false;DI();if(U)SR({nm:U.nm,co:U.co,bd:U.bd,ex:cT,en:EN[cT],sc:0,cr:0,tot:20,ps:false,tm:'부정행위',dt:new Date().toLocaleString('ko-KR'),ts:Date.now(),ch:true,cr2:r});document.getElementById('sm').textContent=r+' — 불합격 처리';document.getElementById('so').style.display='flex';}
+
+let _v,_k,_c;
+function ES(){cN=0;_v=()=>{if(!xO)return;if(document.hidden){cN++;if(cN>=2)CF('화면 이탈');else{document.getElementById('cb').style.display='block';setTimeout(()=>document.getElementById('cb').style.display='none',4000);}}};_k=e=>{if(!xO)return;if(e.key==='PrintScreen'||e.key==='F12'||(e.ctrlKey&&e.shiftKey)||(e.ctrlKey&&'pPsSuUcC'.includes(e.key))||(e.metaKey&&e.shiftKey)){e.preventDefault();CF('캡처/개발자도구');return false;}};_c=e=>{if(xO)e.preventDefault();};document.addEventListener('visibilitychange',_v);document.addEventListener('keydown',_k,true);document.addEventListener('contextmenu',_c,true);}
+function DI(){document.removeEventListener('visibilitychange',_v);document.removeEventListener('keydown',_k,true);document.removeEventListener('contextmenu',_c,true);}
+
+function GR(){
+  if(_fbEnabled)return _resultsCache;
+  try{return JSON.parse(localStorage.getItem(RK)||'[]');}catch{return[];}
+}
+function SR(r){
+  if(_fbEnabled){_resultsRef.push(r);return;}
+  const a=(function(){try{return JSON.parse(localStorage.getItem(RK)||'[]');}catch{return[];}})();
+  a.push(r);localStorage.setItem(RK,JSON.stringify(a));
+}
+
+function AL(){if(document.getElementById('ap').value==='admin1234'){document.getElementById('ap').value='';SP('p9');}else alert('비밀번호 오류');}
+function ST(t,el){aT=t;document.querySelectorAll('.tb').forEach(b=>b.classList.remove('ac'));el.classList.add('ac');RA();}
+function FR(){let d=GR();const fe=document.getElementById('fE').value,fr=document.getElementById('fR').value,fs=(document.getElementById('fS').value||'').toLowerCase();if(fe)d=d.filter(r=>r.ex===fe);if(fr==='pass')d=d.filter(r=>r.ps);if(fr==='fail')d=d.filter(r=>!r.ps);if(fs)d=d.filter(r=>(r.nm||'').toLowerCase().includes(fs)||(r.co||'').toLowerCase().includes(fs));if(aT==='pass')d=d.filter(r=>r.ps);if(aT==='fail')d=d.filter(r=>!r.ps);return d.sort((a,b)=>(b.ts||0)-(a.ts||0));}
+function RA(){const all=GR(),t=all.length,p=all.filter(r=>r.ps).length,f=t-p,a=t?Math.round(all.reduce((s,r)=>s+r.sc,0)/t):0;document.getElementById('as').innerHTML='<div class="si"><div class="v">'+t+'</div><div class="l">총 응시</div></div><div class="si"><div class="v" style="color:var(--s)">'+p+'</div><div class="l">합격</div></div><div class="si"><div class="v" style="color:var(--d)">'+f+'</div><div class="l">불합격</div></div><div class="si"><div class="v">'+a+'점</div><div class="l">평균</div></div><div class="si"><div class="v">'+(t?Math.round(p/t*100):0)+'%</div><div class="l">합격률</div></div>';const data=FR();let h='<table><tr><th>No</th><th>일시</th><th>시험</th><th>업체</th><th>이름</th><th>생년월일</th><th>점수</th><th>정답</th><th>시간</th><th>결과</th><th>비고</th></tr>';if(!data.length)h+='<tr><td colspan=11 style="text-align:center;padding:30px;color:var(--g5)">데이터 없음</td></tr>';data.forEach((r,i)=>{h+='<tr><td>'+(i+1)+'</td><td>'+(r.dt||'')+'</td><td>'+(EI[r.ex]||'')+' '+(r.en||'')+'</td><td>'+(r.co||'')+'</td><td>'+(r.nm||'')+'</td><td>'+(r.bd||'')+'</td><td><b>'+r.sc+'</b></td><td>'+r.cr+'/'+r.tot+'</td><td>'+(r.tm||'')+'</td><td><span class="'+(r.ps?'bpa':'bfa')+'">'+(r.ps?'합격':'불합격')+'</span></td><td style="color:var(--d);font-size:10px">'+(r.ch?'⛔'+(r.cr2||''):'')+'</td></tr>';});h+='</table>';document.getElementById('at').innerHTML=h;}
+function EX(type){let d=GR();const fe=document.getElementById('fE').value,fs=(document.getElementById('fS').value||'').toLowerCase();if(fe)d=d.filter(r=>r.ex===fe);if(fs)d=d.filter(r=>(r.nm||'').toLowerCase().includes(fs)||(r.co||'').toLowerCase().includes(fs));if(type==='pass')d=d.filter(r=>r.ps);if(type==='fail')d=d.filter(r=>!r.ps);d.sort((a,b)=>(b.ts||0)-(a.ts||0));const tn={all:'전체',pass:'합격자',fail:'불합격자'};let csv='\uFEFFNo,일시,시험,업체,이름,생년월일,점수,정답,총문항,시간,결과,비고\n';d.forEach((r,i)=>{csv+=(i+1)+',"'+(r.dt||'')+'","'+(r.en||'')+'","'+(r.co||'')+'","'+(r.nm||'')+'","'+(r.bd||'')+'",'+r.sc+','+r.cr+','+r.tot+',"'+(r.tm||'')+'","'+(r.ps?'합격':'불합격')+'","'+(r.ch?(r.cr2||''):'')+'"\n';});const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));a.download='시험_'+tn[type]+'_'+new Date().toISOString().slice(0,10)+'.csv';a.click();}
+document.addEventListener('dragstart',e=>e.preventDefault());
+document.addEventListener('copy',e=>{if(xO)e.preventDefault();});
+</script></body></html>
