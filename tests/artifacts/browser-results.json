@@ -9,9 +9,13 @@
     "390px 모바일 응시 / 답안 저장·서버 채점 / HTML 입력 이스케이프 / 가로 넘침 없음",
     "재생성 / 이전 코드 입장 차단 / 문제 미표시",
     "화면 이탈 이벤트 모의: 1회 경고 / 2회 서버 종료",
-    "관리자 보안 기록 응시자·유형·자동 종료 표시"
+    "관리자 보안 기록 응시자·유형·자동 종료 표시",
+    "관리자 QR 화면에서도 부정행위 알림 팝업",
+    "모바일 세 손가락 터치: 1회 즉시 종료",
+    "알림창·제어센터 호출(포커스 상실, 화면 유지): 문제 즉시 가림 / 1회 즉시 종료",
+    "포커스 즉시 복귀 시 오탐 종료 없음",
+    "관리자 실시간 알림: 캡처 의심 자동 종료 표시"
   ],
   "errors": [],
-  "environment": "Chromium headless; external requests blocked; local QR and SheetJS vendor scripts used; Firebase REST mocked; mobile viewport emulation, not physical device",
-  "exportContentVerified": true
+  "environment": "Chromium headless; external requests blocked; local QR and SheetJS vendor scripts used; Firebase REST mocked; mobile viewport emulation, not physical device"
 }
