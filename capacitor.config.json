@@ -1,0 +1,7 @@
+{
+  "appId": "kr.co.safetyexam.app",
+  "appName": "안전교육 시험",
+  "webDir": "public",
+  "android": { "allowMixedContent": false },
+  "ios": { "contentInset": "never" }
+}

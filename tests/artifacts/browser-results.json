@@ -14,7 +14,11 @@
     "모바일 세 손가락 터치: 1회 즉시 종료",
     "알림창·제어센터 호출(포커스 상실, 화면 유지): 문제 즉시 가림 / 1회 즉시 종료",
     "포커스 즉시 복귀 시 오탐 종료 없음",
-    "관리자 실시간 알림: 캡처 의심 자동 종료 표시"
+    "관리자 실시간 알림: 캡처 의심 자동 종료 표시",
+    "앱 모드: 관리자·감독 메뉴 숨김",
+    "앱 모드: 시험 시작 전 화면 보호 활성화 / 서버 절대주소 호출 / OS 캡처 이벤트 리스너 등록",
+    "앱 모드: OS 스크린샷 신호 → 즉시 종료 / 화면 보호 해제",
+    "앱 캡처 종료가 관리자 알림에 표시"
   ],
   "errors": [],
   "environment": "Chromium headless; external requests blocked; local QR and SheetJS vendor scripts used; Firebase REST mocked; mobile viewport emulation, not physical device"
